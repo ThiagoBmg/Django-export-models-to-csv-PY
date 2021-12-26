@@ -2,9 +2,8 @@
 from genericpath import isdir, isfile
 from os import listdir, system
 from posixpath import join
-MODELS = list() 
 
-system(' mkdir extract_doc ')
+MODELS = list() 
 """
 
 TODO:
@@ -63,7 +62,8 @@ def run2(FILE_NAME:str):
                             "fild_type":d[1].replace(" ",""),
                             "desc":'-'.replace("\n","")
                         }) if d[0].replace("","") != 'N' else ...
-    with open(FILE_NAME.replace('txt', 'csv'), 'w') as file:
+
+    with open(FILE_NAME.replace('txt', 'csv').replace("extract_doc","extract_doc/csv"), 'w') as file:
         for i in t:
             file.writelines(f'{i.get("table_name")};')
             file.writelines(f'{i.get("fild_name")};')
@@ -78,8 +78,9 @@ TODO:
 
 """
 def get_files_from_dir(dir:str):
-    files = [file for file in listdir(dir) if isfile(join(dir,file))]
-    dirs = [file for file in listdir(dir) if isdir(join(dir,file))]
+    print(dir)
+    files = [file for file in listdir(f'../{dir}') if isfile(join(f'../{dir}',file))]
+    dirs = [file for file in listdir(f'../{dir}') if isdir(join(f'../{dir}',file))]
     return files , dirs
 
 def get_model_files_from_list(dir:str, list:str):
@@ -90,7 +91,7 @@ def get_model_files_from_list(dir:str, list:str):
 
 def run():
     IGNORE_DIRS = ['.venv', '.git']
-    THIS_PATH = [dir for dir in listdir('.') if isdir(join('.',dir)) and dir not in IGNORE_DIRS ]
+    THIS_PATH = [dir for dir in listdir('..') if isdir(join('..',dir)) and dir not in IGNORE_DIRS ]
 
     print('Qual projeto deseja escanear... ', end="\n")
     index = 1
@@ -105,29 +106,36 @@ def run():
     get_model_files_from_list(THIS_PATH[PROJETO_PATH-1],files)
 
     for d in dirs:
-        files = [file for file in listdir(f'./{THIS_PATH[PROJETO_PATH-1]}/{d}') if isfile(f'./{THIS_PATH[PROJETO_PATH-1]}/{d}/{file}')]
-        get_model_files_from_list(f'./{THIS_PATH[PROJETO_PATH-1]}/{d}', files)
+        files = [file for file in listdir(f'../{THIS_PATH[PROJETO_PATH-1]}/{d}') if isfile(f'../{THIS_PATH[PROJETO_PATH-1]}/{d}/{file}')]
+        get_model_files_from_list(f'../{THIS_PATH[PROJETO_PATH-1]}/{d}', files)
     
     return MODELS
 
-"""
+def main():
+    """
 
-TODO:
+    TODO:
 
-"""
-step01_ = run()
-list_ = list()
-for i in step01_:
-    with open(f'{i[0]}/{i[1]}', 'r') as file:
-        data = file.read()
-    
-    list_.append(f'./extract_doc/{i[0].replace("/","-").replace(".","")}.txt')
+    """
+    system(' mkdir extract_doc ')
+    system(' mkdir ./extract_doc/csv ')
 
-    with open(f'./extract_doc/{i[0].replace("/","-").replace(".","")}.txt', 'w') as n_file:
-        n_file.write(data)
+    step01_ = run()
+    list_ = list()
+    for i in step01_:
+        with open(f'{i[0]}/{i[1]}', 'r') as file:
+            data = file.read()
+        
+        list_.append(f'./extract_doc/{i[0].replace("/","-").replace(".","")}.txt')
 
-for i in list_:
-    try:
-       run2(i)
-    except Exception as exc: 
-        pass
+        with open(f'./extract_doc/{i[0].replace("/","-").replace(".","")}.txt', 'w') as n_file:
+            n_file.write(data)
+
+    for i in list_:
+        try:
+            run2(i)
+        except Exception as exc: 
+            pass
+
+if __name__ == "__main__":
+    main()
