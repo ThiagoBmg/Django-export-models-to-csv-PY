@@ -1,0 +1,10 @@
+WARNING:__main__:./extract_doc/-coreservices-whatsapp.txt - Quantidade de Tabelas localizadas 4
+WARNING:__main__:./extract_doc/-coreservices-whatsapp.txt - Quantidade de campos localizados 23
+WARNING:__main__:./extract_doc/-coreservices-core.txt - Quantidade de Tabelas localizadas 22
+WARNING:__main__:./extract_doc/-coreservices-core.txt - Quantidade de campos localizados 107
+WARNING:__main__:./extract_doc/-coreservices-smart.txt - Quantidade de Tabelas localizadas 19
+WARNING:__main__:./extract_doc/-coreservices-smart.txt - Quantidade de campos localizados 1165
+WARNING:__main__:./extract_doc/-coreservices-lumia.txt - Quantidade de Tabelas localizadas 3
+WARNING:__main__:./extract_doc/-coreservices-lumia.txt - Quantidade de campos localizados 15
+WARNING:__main__:./extract_doc/-coreservices-django_crontab_manager.txt - Quantidade de Tabelas localizadas 2
+WARNING:__main__:./extract_doc/-coreservices-django_crontab_manager.txt - Quantidade de campos localizados 12
