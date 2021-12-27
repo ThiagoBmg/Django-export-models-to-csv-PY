@@ -81,7 +81,8 @@ def run2(FILE_NAME:str):
             except Exception as exc:
                 log.error(f'{FILE_NAME} - [ERRO AO FORMATAR CAMPO] {exc} - line: {line}')
             
-    with open(FILE_NAME.replace('txt', 'csv').replace("extract_doc","extract_doc/csv"), 'w') as file:
+    with open(FILE_NAME.replace('txt', 'csv')\
+        .replace("extract_doc","extract_doc/csv"), 'w') as file:
         for i in t:
             file.writelines(f'{i.get("table_name")};')
             file.writelines(f'{i.get("fild_name")};')
@@ -96,9 +97,10 @@ TODO:
 
 """
 def get_files_from_dir(dir:str):
-    #print(dir)
-    files = [file for file in listdir(f'../{dir}') if isfile(join(f'../{dir}',file))]
-    dirs = [file for file in listdir(f'../{dir}') if isdir(join(f'../{dir}',file))]
+    files = [file for file in listdir(f'../{dir}') 
+        if isfile(join(f'../{dir}',file))]
+    dirs = [file for file in listdir(f'../{dir}') 
+        if isdir(join(f'../{dir}',file))]
     return files , dirs
 
 def get_model_files_from_list(dir:str, list:str):
@@ -109,7 +111,9 @@ def get_model_files_from_list(dir:str, list:str):
 
 def run():
     IGNORE_DIRS = ['.venv', '.git']
-    THIS_PATH = [dir for dir in listdir('..') if isdir(join('..',dir)) and dir not in IGNORE_DIRS ]
+    THIS_PATH = [dir for dir in listdir('..') \
+        if isdir(join('..',dir)) \
+        and dir not in IGNORE_DIRS ]
 
     print('Qual projeto deseja escanear... ', end="\n")
     index = 1
@@ -124,7 +128,9 @@ def run():
     get_model_files_from_list(THIS_PATH[PROJETO_PATH-1],files)
 
     for d in dirs:
-        files = [file for file in listdir(f'../{THIS_PATH[PROJETO_PATH-1]}/{d}') if isfile(f'../{THIS_PATH[PROJETO_PATH-1]}/{d}/{file}')]
+        files = [file for file in listdir(f'../{THIS_PATH[PROJETO_PATH-1]}/{d}')
+            if isfile(f'../{THIS_PATH[PROJETO_PATH-1]}/{d}/{file}')]
+
         get_model_files_from_list(f'../{THIS_PATH[PROJETO_PATH-1]}/{d}', files)
     
     return MODELS
