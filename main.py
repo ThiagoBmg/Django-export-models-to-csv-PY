@@ -112,8 +112,8 @@ def get_model_files_from_list(dir:str, list:str):
 def run():
     IGNORE_DIRS = ['.venv', '.git']
     THIS_PATH = [dir for dir in listdir('..') \
-        if isdir(join('..',dir)) \
-        and dir not in IGNORE_DIRS ]
+                if isdir(join('..',dir)) \
+                and dir not in IGNORE_DIRS ]
 
     print('Qual projeto deseja escanear... ', end="\n")
     index = 1
@@ -129,7 +129,7 @@ def run():
 
     for d in dirs:
         files = [file for file in listdir(f'../{THIS_PATH[PROJETO_PATH-1]}/{d}')
-            if isfile(f'../{THIS_PATH[PROJETO_PATH-1]}/{d}/{file}')]
+                if isfile(f'../{THIS_PATH[PROJETO_PATH-1]}/{d}/{file}')]
 
         get_model_files_from_list(f'../{THIS_PATH[PROJETO_PATH-1]}/{d}', files)
     
