@@ -150,9 +150,9 @@ def main():
         with open(f'{i[0]}/{i[1]}', 'r') as file:
             data = file.read()
         
-        list_.append(f'./extract_doc/{i[0].replace("/","-").replace(".","")}.txt')
+        list_.append(f'./extract_doc/{i[0].replace("/","0").replace(".","")}.txt')
 
-        with open(f'./extract_doc/{i[0].replace("/","-").replace(".","")}.txt', 'w') as n_file:
+        with open(f'./extract_doc/{i[0].replace("/","0").replace(".","")}.txt', 'w') as n_file:
             n_file.write(data)
     system('clear')
     for i in list_:
